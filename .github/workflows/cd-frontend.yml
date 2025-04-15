@@ -1,4 +1,4 @@
-name : Deployment of Websocket
+name : Deployment of Frontend
 
 on:
   push:
@@ -21,6 +21,8 @@ jobs:
               uses : docker/build-push-action@v4
               with:
                 context: .
-                file: ./docker/Dockerfile.ws
+                file: ./docker/Dockerfile.frontend
+                build-args: |
+                    DATABASE_URL=${{ secrets.DATABASE_URL }}
                 push: true
-                tags: pankajkumardev/websocket-app:${{ github.sha }}
+                tags: pankajkumardev/frontend-app:${{ github.sha }}
