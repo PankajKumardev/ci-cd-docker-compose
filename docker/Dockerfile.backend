@@ -14,7 +14,7 @@ RUN bun install
 
 
 RUN bun run generate:db
-RUN DB_URL=$DB_URL bunx turbo build --filter=web...
+# RUN DB_URL=$DB_URL bunx turbo build --filter=web...
 
 EXPOSE 8080
 
