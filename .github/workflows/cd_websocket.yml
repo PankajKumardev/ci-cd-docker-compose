@@ -1,8 +1,8 @@
-name : Deployment of Backend
+name : Deployment of Websocket
 
 on:
   push:
-    branches: [production]
+    branches: [main]
 jobs:
   build:
         runs-on: ubuntu-latest
@@ -21,6 +21,6 @@ jobs:
               uses : docker/build-push-action@v4
               with:
                 context: .
-                file: ./docker/Dockerfile.backend
+                file: ./docker/Dockerfile.ws
                 push: true
-                tags: pankajkumardev/backend-app:${{ github.sha }}
+                tags: pankajkumardev/websocket-app:${{ github.sha }}
