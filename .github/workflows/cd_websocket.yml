@@ -2,7 +2,7 @@ name : Deployment of Websocket
 
 on:
   push:
-    branches: [production]
+    branches: [main]
 jobs:
   build:
         runs-on: ubuntu-latest
@@ -24,3 +24,14 @@ jobs:
                 file: ./docker/Dockerfile.ws
                 push: true
                 tags: pankajkumardev/websocket-app:${{ github.sha }}
+            - name: Deploy to Ec2
+              uses: appleboy/ssh-action@master
+              with:
+                host: ${{ secrets.SSH_HOST }}
+                username: ${{ secrets.SSH_USERNAME }}
+                key: ${{ secrets.SSH_KEY }}
+                script : |
+                  docker pull pankajkumardev/websocket-app:${{ github.sha }}
+                  docker stop websocket-app || true
+                  docker rm websocket-app || true
+                  docker run -d -e DATABASE_URL=${{secrets.DATABASE_URL}} --name websocket-app -p 8080:8080 pankajkumardev/websocket-app:${{ github.sha }}
