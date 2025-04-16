@@ -5,6 +5,11 @@ const app = express();
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('🚀 Backend is running!');
+});
+
+
 app.get('/users', (req, res) => {
   prismaClient.user
     .findMany()
