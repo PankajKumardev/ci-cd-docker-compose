@@ -2,7 +2,7 @@ name : Deployment of Backend
 
 on:
   push:
-    branches: [production]
+    branches: [main]
 jobs:
   build:
         runs-on: ubuntu-latest
@@ -24,3 +24,16 @@ jobs:
                 file: ./docker/Dockerfile.backend
                 push: true
                 tags: pankajkumardev/backend-app:${{ github.sha }}
+            
+            - name: Deploy to Ec2
+              uses: appleboy/ssh-action@master
+              with:
+                host: ${{ secrets.SSH_HOST }}
+                username: ${{ secrets.SSH_USERNAME }}
+                key: ${{ secrets.SSH_KEY }}
+                script : |
+                  docker pull pankajkumardev/backend-app:${{ github.sha }}
+                  docker stop backend-app || true
+                  docker rm backend-app || true
+                  docker run -d -e DATABASE_URL=${{secrets.DATABASE_URL}} --name backend-app -p 8080:8080 pankajkumardev/backend-app:${{ github.sha }}
+                
