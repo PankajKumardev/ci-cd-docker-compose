@@ -35,5 +35,5 @@ jobs:
                   docker pull pankajkumardev/backend-app:${{ github.sha }}
                   docker stop backend-app || true
                   docker rm backend-app || true
-                  docker run -d -e DATABASE_URL=${{secrets.DATABASE_URL}} --name backend-app -p 8080:8080 pankajkumardev/backend-app:${{ github.sha }}
+                  docker run -d -e DATABASE_URL=${{secrets.DATABASE_URL}} --name backend-app -p 8081:8081 pankajkumardev/backend-app:${{ github.sha }}
                 
