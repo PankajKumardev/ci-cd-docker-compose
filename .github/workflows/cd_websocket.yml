@@ -34,4 +34,4 @@ jobs:
                   docker pull pankajkumardev/websocket-app:${{ github.sha }}
                   docker stop websocket-app || true
                   docker rm websocket-app || true
-                  docker run -d -e DATABASE_URL=${{secrets.DATABASE_URL}} --name websocket-app -p 8080:8080 pankajkumardev/websocket-app:${{ github.sha }}
+                  docker run -d -e DATABASE_URL=${{secrets.DATABASE_URL}} --name websocket-app -p 8081:8081 pankajkumardev/websocket-app:${{ github.sha }}
