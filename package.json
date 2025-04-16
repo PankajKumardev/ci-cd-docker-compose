@@ -9,8 +9,8 @@
     "check-types": "turbo run check-types",
     "start:backend": "cd apps/backend && bun run index.ts",
     "start:ws": "cd apps/websocket && bun run index.ts",
-    "start:frontend": "cd apps/frontend && bun run start",
-    "build:frontend": "cd apps/frontend && bun run build",
+    "start:frontend": "cd apps/web && bun run start",
+    "build:frontend": "cd apps/web && bun run build",
     "generate:db": "cd packages/db && bunx prisma generate"
   },
   "devDependencies": {
